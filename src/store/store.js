@@ -5,6 +5,7 @@ const store = configureStore({
     reducer: {
         auth: authReducer,
         // TODO: add postSlice reducer for posts
+        // ? post: postReducer
     }
 })
 
