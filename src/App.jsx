@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
-import './App.css'
 import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
 import { Footer, Header } from './components'
 
 function App() {
   const [loading, setLoading] = useState(true)
-  const [userName, setUserName] = useState('')
+  // const [userName, setUserName] = useState('')
   const dispatch = useDispatch()
 
   const userAuth = useSelector((state) => state.auth)
@@ -21,7 +20,7 @@ function App() {
         .then((userData) => {
           if (userData) {
             dispatch(login({ userData }))
-            setUserName(userAuth.userData)
+            // setUserName(userAuth.userData)
           } else {
             dispatch(logout())
           }
@@ -30,7 +29,7 @@ function App() {
     } else {
       dispatch(logout())
       setLoading(false)
-      setUserName('')
+      // setUserName('')
     }
 
     // return () => {
@@ -41,7 +40,7 @@ function App() {
     // }
   }, [])
 
-  console.log('username: ', userName)
+  // console.log('username: ', userName)
 
   return !loading ? (<div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
     <div className='w-full block'>
