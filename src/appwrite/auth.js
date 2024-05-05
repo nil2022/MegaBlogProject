@@ -13,6 +13,7 @@ export class AuthService {
     this.account = new Account(this.client);
   }
 
+  // ! Check code below for appwrite 'createVerification' method NOT WORKING !!
   async createAccount({ email, password, name }) {
     try {
       const userAccount = await this.account.create(
@@ -24,13 +25,50 @@ export class AuthService {
       if (userAccount) {
         // call another method
         console.log("Account created Successfully");
+        // return this.verifyEmail();
         return this.login({ email, password });
       } else {
         console.log("Account creation failed!");
-        return userAccount;
+        // return userAccount;
       }
     } catch (error) {
       console.log("Appwrite service :: createAccount :: error: ", error);
+      throw error;
+    }
+  }
+
+  async verifyEmail(url) {
+    try {
+      const verfiySuccess = await this.account.createVerification(url);
+      if (verfiySuccess) {
+        console.log('Email verification sent successfully');
+        return verfiySuccess;
+      } else {
+        console.log('Email verification failed to send!');
+        return
+      }
+    } catch (error) {
+      console.log('Appwrite service :: verifyEmail :: error: ', error);
+      throw error;
+    }
+  }
+
+  async updateVerification() {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('userId');
+      const secret = urlParams.get('secret');
+
+      const updateVeficication = await this.account.updateVerification(userId, secret);
+      if (updateVeficication) {
+        console.log('Veficication updated successfully', updateVeficication);
+        return updateVeficication;
+      } else {
+        console.log('User verification failed!');
+        return
+      }
+    } catch (error) {
+      console.log('Appwrite service :: updateVeficication :: error: ', error);
       throw error;
     }
   }
