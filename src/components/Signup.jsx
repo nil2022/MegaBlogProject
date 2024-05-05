@@ -6,6 +6,8 @@ import { Button, Input, Logo } from './index.js'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
+const redirectUrlAfterVerification = import.meta.env.VITE_EMAILVERIFICATION_URL
+
 function Signup() {
   const navigate = useNavigate()
   const [error, setError] = useState("")
@@ -17,12 +19,16 @@ function Signup() {
     try {
       const userData = await authService.createAccount(data)
       if (userData) {
-        const userData = await authService.getCurrentUser()
-        if (userData) {
-          // console.log('User data: ', userData)
-          dispatch(login({ userData }))
-          navigate("/")
+        const response = await authService.verifyEmail(redirectUrlAfterVerification)
+        if (!response) {
+          throw new Error('Email verification failed!')
         }
+        // const userData = await authService.getCurrentUser()
+          await authService.logout()
+          // console.log('User data: ', userData)
+          // dispatch(login({ userData }))
+          navigate("/verify-email/status")
+  
       }
     } catch (error) {
       setError(error.message)

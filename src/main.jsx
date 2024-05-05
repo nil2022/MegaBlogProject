@@ -16,6 +16,8 @@ import AllPosts from './pages/AllPosts.jsx'
 import AddPost from './pages/AddPost.jsx'
 import EditPost from './pages/EditPost.jsx'
 import Post from './pages/Post.jsx'
+import VerifyEmail from './components/VerifyEmail.jsx'
+import EmailVerifySent from './components/EmailVerifySent.jsx'
 
 
 const routes = createBrowserRouter([
@@ -97,7 +99,22 @@ const routes = createBrowserRouter([
           </AuthLayout>
         ),
       },
-
+      {
+        path: '/verify-email',
+        element: (
+          <AuthLayout authentication>
+            <VerifyEmail />
+          </AuthLayout>
+        )
+      },
+      {
+        path: '/verify-email/status',
+        element: (
+          <AuthLayout authentication>
+            <EmailVerifySent />
+          </AuthLayout>
+        )
+      },
       {
         path: '*',
         element: <Error />,
