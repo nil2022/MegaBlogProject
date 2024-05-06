@@ -14,7 +14,7 @@ function Signup() {
   // const dispatch = useDispatch()
   const { register, handleSubmit } = useForm()
 
-  const create = async(data) => {
+  const create = async (data) => {
     setError("")
     try {
       const userData = await authService.createAccount(data)
@@ -24,11 +24,11 @@ function Signup() {
           throw new Error('Email verification failed!')
         }
         // const userData = await authService.getCurrentUser()
-          await authService.logout()
-          // console.log('User data: ', userData)
-          // dispatch(login({ userData }))
-          navigate("/verify-email/status")
-  
+        await authService.logout()
+        // console.log('User data: ', userData)
+        // dispatch(login({ userData }))
+        navigate("/verify-email/status")
+
       }
     } catch (error) {
       setError(error.message)
@@ -93,6 +93,9 @@ function Signup() {
             </Button>
           </div>
         </form>
+        <div className='text-center mt-4'>
+          If you face any issue, please click on Support Tab.
+        </div>
       </div>
     </div>
   )

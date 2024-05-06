@@ -18,7 +18,7 @@ function ProfileBtn() {
   return authSlice ? (
     <div className="w-full items-center">
       <h1 className="text-2xl font-[600] text-center ">User Details:</h1>
-      <div className="flex-flex-wrap ">
+      <div className="flex flex-col items-center ">
       <p className="text-xl font-semibold">Name: {authSlice.name}</p>
       <p className="text-xl font-semibold">Email: {authSlice.email}</p>
       </div>

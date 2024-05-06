@@ -1,6 +1,9 @@
 const {
 	default:flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const tailwindForms = require('@tailwindcss/forms');
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
 function addVariablesForColors({ addBase, theme }) {
@@ -35,5 +38,5 @@ export default {
 			},
 		},
 	},
-	plugins: [addVariablesForColors],
+	plugins: [addVariablesForColors, tailwindForms],
 };

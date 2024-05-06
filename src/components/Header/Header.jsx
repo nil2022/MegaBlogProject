@@ -38,18 +38,18 @@ function Header() {
       slug: "/profile",
       active: authStatus,
     },
-    // {
-    //   name: "Logout",
-    //   slug: "/logout",
-    //   active: authStatus,
-    // }
+    {
+      name: "Support",
+      slug: "/contact-us",
+      active: true,
+    }
   ]
 
   return (
-    <header className='py-3 shadow bg-gray-500'>
+    <header className='py-3 shadow bg-gray-500 '>
       <Container>
         <nav className='flex'>
-          <div className='mr-4'>
+          <div className='px-6 py-2 text-center'>
             <Link to="/">
               <Logo width='70px' />
             </Link>
