@@ -102,7 +102,7 @@ const routes = createBrowserRouter([
       {
         path: '/verify-email',
         element: (
-          <AuthLayout authentication>
+          <AuthLayout authentication={false}>
             <VerifyEmail />
           </AuthLayout>
         )
@@ -110,7 +110,7 @@ const routes = createBrowserRouter([
       {
         path: '/verify-email/status',
         element: (
-          <AuthLayout authentication>
+          <AuthLayout authentication={false}>
             <EmailVerifySent />
           </AuthLayout>
         )
