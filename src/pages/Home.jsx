@@ -74,7 +74,7 @@ function Home() {
                             <div className="flex flex-wrap">
                                 <div className="p-2 w-full">
                                     <h1 className="text-4xl text-white font-bold hover:text-gray-500 transition-all duration-500">
-                                        Welcome. Login to get started
+                                        Welcome, Login to get started
                                     </h1>
                                 </div>
                             </div>

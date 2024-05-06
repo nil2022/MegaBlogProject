@@ -121,10 +121,7 @@ const routes = createBrowserRouter([
       {
         path: '/contact-us',
         element: (
-          <AuthLayout authentication={false}>
-          {" "}
-            <Support />
-          </AuthLayout>
+          <Support />
         ),
       },
       {

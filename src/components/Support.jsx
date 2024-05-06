@@ -11,7 +11,7 @@ export default function Support() {
 
     const contactFormSubmit = async (data) => {
         try {
-            console.log(data)
+            // console.log(data)
             const response = await appwriteService.createFeedbackPost(data)
             if (response) {
                 alert('Feedback submitted successfully!')
@@ -24,10 +24,10 @@ export default function Support() {
     return (
         <div className="isolate bg-slate-900 px-6 py-24 sm:py-10 lg:px-8 h-100vh w-full relative">
             <div className="mx-auto max-w-2xl text-center relative z-10">
-                <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-b from-slate-300 to-slate-800 bg-clip-text text-transparent sm:text-6xl">
+                <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-b from-slate-300 to-slate-800 bg-clip-text text-transparent sm:text-6xl">
                     Contact Us
                 </h2>
-                <p className="mt-4 text-lg leading-8 text-white">
+                <p className="mt-4 text-md sm:text-lg leading-8 text-white">
                     If you are facing any issues, please fill out the form below. We will get back to you as soon as possible.
                 </p>
             </div>
@@ -43,6 +43,7 @@ export default function Support() {
                                 type="text"
                                 name="first-name"
                                 id="first-name"
+                                placeholder='John'
                                 {...register("firstName", {
                                     required: true
                                 })}
@@ -60,6 +61,7 @@ export default function Support() {
                                 type="text"
                                 name="last-name"
                                 id="last-name"
+                                placeholder='Doe'
                                 {...register("lastName")}
                                 autoComplete="family-name"
                                 className="block w-full rounded-md border-0 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-4 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 bg-slate-800 transition-all duration-500 outline-none"
@@ -75,6 +77,7 @@ export default function Support() {
                                 type="email"
                                 name="email"
                                 id="email"
+                                placeholder='john@example.com'
                                 {...register("email", {
                                     required: true,
                                     validate: {
@@ -95,6 +98,7 @@ export default function Support() {
                             <textarea
                                 name="message"
                                 id="message"
+                                placeholder='Enter your message here...'
                                 {...register("message", {
                                     required: true,
                                     minLength: 10,

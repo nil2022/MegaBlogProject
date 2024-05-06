@@ -82,7 +82,7 @@ function Login() {
             className='flex items-center justify-center w-full '>
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-zinc-800"
             >
-                <div className='mx-auto w-full max-w-lg rounded-xl p-10 border border-black/10 text-white'>
+                <div className='mx-auto w-full max-w-lg rounded-xl sm:p-10  text-white'>
                     <div className="mb-2 flex justify-center">
                         <span className="inline-block w-full max-w-[100px]">
                             <Logo width="100%" />
@@ -103,7 +103,7 @@ function Login() {
                         <div className='space-y-5'>
                             <Input
                                 label="Email: "
-                                placeholder="Enter your email"
+                                placeholder="john@example.com"
                                 type="email"
                                 {...register("email", {
                                     required: true,
@@ -112,10 +112,11 @@ function Login() {
                                             "Must be a valid email address"
                                     }
                                 })}
+                                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
                             />
                             <Input
                                 label="Password: "
-                                placeholder="Enter your password"
+                                placeholder="Your Password"
                                 type="password"
                                 {...register("password", {
                                     required: true,
@@ -124,6 +125,7 @@ function Login() {
                                     //     "Password must be between 8 and 16 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character"
                                     // }
                                 })}
+                                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
                             />
                             <Button
                                 type="submit"
