@@ -41,6 +41,29 @@ export class Service {
             throw error;
         }
     }
+    async createFeedbackPost({firstName, lastName, email, message}) {
+        try {
+            // console.log('userId: ', userId);
+            const createdPost = await this.databases.createDocument(
+                urlConfig.appwriteDatabaseId,
+                urlConfig.appwriteFeedbackCollectionId,
+                ID.unique(),
+                {
+                    firstName,
+                    lastName: lastName ? lastName : '',
+                    email,
+                    message,
+                }
+            )
+            console.log('Feedback Post created ! ✅');
+            return createdPost;
+        } catch (error) {
+            console.log('Appwrite service :: createFeedbackPost :: error: ', error);
+            throw error;
+        }
+    }
+
+
 
     async updatePost(slug, {title, content, featuredImage, status}) {
         try {

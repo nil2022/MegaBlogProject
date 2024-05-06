@@ -18,6 +18,7 @@ import EditPost from './pages/EditPost.jsx'
 import Post from './pages/Post.jsx'
 import VerifyEmail from './components/VerifyEmail.jsx'
 import EmailVerifySent from './components/EmailVerifySent.jsx'
+import Support from './components/Support.jsx'
 
 
 const routes = createBrowserRouter([
@@ -103,6 +104,7 @@ const routes = createBrowserRouter([
         path: '/verify-email',
         element: (
           <AuthLayout authentication={false}>
+          {" "}
             <VerifyEmail />
           </AuthLayout>
         )
@@ -111,9 +113,16 @@ const routes = createBrowserRouter([
         path: '/verify-email/status',
         element: (
           <AuthLayout authentication={false}>
+          {" "}
             <EmailVerifySent />
           </AuthLayout>
         )
+      },
+      {
+        path: '/contact-us',
+        element: (
+          <Support />
+        ),
       },
       {
         path: '*',

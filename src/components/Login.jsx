@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { login as authLogin } from '../store/authSlice'
 import { Button, Input, Logo } from './index'
@@ -14,12 +14,13 @@ function Login() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
-    const [loginData, setLoginData] = useState()    
+    const [loginData, setLoginData] = useState()
+    const [userIsVerified, setUserIsVerified] = useState(true)  
 
     // const authSlice = useSelector((state) => state.auth)
     // console.log('authSlice: (in Login component(in components/Login.jsx)) ', authSlice)
 
-    // console.log('loginData: ', loginData)
+    // console.log('loginData: ', handleSubmit)
 
     /** FUNCTION TO LOGIN USER */
     const login = async (data) => {
@@ -30,7 +31,9 @@ function Login() {
             if (session) {
                 console.log('Login Successfull !')
                 const userData = await authService.getCurrentUser()
+                localStorage.setItem('userVerified', JSON.stringify(userData.emailVerification))
                 if (userData.emailVerification) {
+                    setUserIsVerified(true)
                     console.log('userData: (in Login component(in components/Login.jsx)) ', userData)
                     dispatch(authLogin({ userData }))
                     navigate("/")
@@ -51,8 +54,8 @@ function Login() {
         setError("")
         try {
             if(loginData === undefined) {
-                alert('Email and password are required')
-                throw new Error('Email and password are required')
+                alert('Please provide your Email and password')
+                throw new Error('Email and password are required to send verification link')
             }
             await authService.login(loginData)
             const response = await authService.verifyEmail(redirectUrlAfterVerification)
@@ -67,15 +70,22 @@ function Login() {
         }
     }
 
+    useEffect(() => {
+        // console.log('userIsVerified: ', userIsVerified)
+        return () => {
+            localStorage.removeItem('userVerified')
+        }
+    }, [userIsVerified])
+
     return (
         <div
             className='flex items-center justify-center w-full '>
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-zinc-800"
             >
-                <div className='mx-auto w-full max-w-lg rounded-xl p-10 border border-black/10 text-white'>
+                <div className='mx-auto w-full max-w-lg rounded-xl sm:p-10  text-white'>
                     <div className="mb-2 flex justify-center">
                         <span className="inline-block w-full max-w-[100px]">
-                            {/* <Logo width="100%" /> */}
+                            <Logo width="100%" />
                         </span>
                     </div>
                     <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
@@ -88,12 +98,12 @@ function Login() {
                             Sign Up
                         </Link>
                     </p>
-                    {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+                    {error && <p className="text-red-600 mt-8 mx-auto text-center justify-center max-w-[280px]">{error}</p>}
                     <form onSubmit={handleSubmit(login)} className='mt-8'>
                         <div className='space-y-5'>
                             <Input
                                 label="Email: "
-                                placeholder="Enter your email"
+                                placeholder="john@example.com"
                                 type="email"
                                 {...register("email", {
                                     required: true,
@@ -102,10 +112,11 @@ function Login() {
                                             "Must be a valid email address"
                                     }
                                 })}
+                                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
                             />
                             <Input
                                 label="Password: "
-                                placeholder="Enter your password"
+                                placeholder="Your Password"
                                 type="password"
                                 {...register("password", {
                                     required: true,
@@ -114,6 +125,7 @@ function Login() {
                                     //     "Password must be between 8 and 16 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character"
                                     // }
                                 })}
+                                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
                             />
                             <Button
                                 type="submit"
@@ -122,7 +134,7 @@ function Login() {
                             </Button>
                         </div>
                     </form>
-                    <div className='text-center mt-4'>
+                    {localStorage.getItem('userVerified') && (<div className='text-center mt-4'>
                         Email not verified ? <br />
                         <button
                             onClick={() => resendVerificationEmail()}
@@ -130,6 +142,9 @@ function Login() {
                         >
                             Click Here to Send Verification Link
                         </button>
+                    </div>)}
+                    <div className='text-center mt-4'>
+                        If you face any issue, please click on Support Tab.
                     </div>
                 </div>
             </BackgroundGradient>
