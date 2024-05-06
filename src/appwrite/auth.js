@@ -37,6 +37,7 @@ export class AuthService {
     }
   }
 
+  /** SEND VERIFICATION LINK TO USER'S EMAIL ADDRESS */
   async verifyEmail(url) {
     try {
       const verfiySuccess = await this.account.createVerification(url);
@@ -102,7 +103,7 @@ export class AuthService {
 
   async logout() {
     try {
-      await this.account.deleteSessions();
+      await this.account.deleteSession('current');
       console.log("Logout Successfully");
     } catch (error) {
       console.log("Appwrite service :: logout :: error: ", error);

@@ -7,31 +7,63 @@ import authService from '../appwrite/auth'
 import { useForm } from "react-hook-form"
 import { BackgroundGradient } from './ui/background-gradient'
 
+const redirectUrlAfterVerification = import.meta.env.VITE_EMAILVERIFICATION_URL
+
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
+    const [loginData, setLoginData] = useState()    
 
-    const authSlice = useSelector((state) => state.auth)
-    console.log('authSlice: (in Login component(in components/Login.jsx)) ', authSlice)
+    // const authSlice = useSelector((state) => state.auth)
+    // console.log('authSlice: (in Login component(in components/Login.jsx)) ', authSlice)
 
+    // console.log('loginData: ', loginData)
+
+    /** FUNCTION TO LOGIN USER */
     const login = async (data) => {
+        setLoginData(data);
         setError("")
         try {
             const session = await authService.login(data)
             if (session) {
                 console.log('Login Successfull !')
                 const userData = await authService.getCurrentUser()
-                if (userData) {
+                if (userData.emailVerification) {
                     console.log('userData: (in Login component(in components/Login.jsx)) ', userData)
                     dispatch(authLogin({ userData }))
                     navigate("/")
+                } else {
+                    await authService.logout()
+                    throw new Error('Email not verified!')
                 }
+                alert('Login Successfull !')
             }
         } catch (error) {
             setError(error.message)
             console.log('Login error: ', error)
+        }
+    }
+
+    /** FUNCTION TO RE-SEND VERIFICATION MAIL TO USER'S EMAIL ADDRESS */
+    const resendVerificationEmail = async () => {
+        setError("")
+        try {
+            if(loginData === undefined) {
+                alert('Email and password are required')
+                throw new Error('Email and password are required')
+            }
+            await authService.login(loginData)
+            const response = await authService.verifyEmail(redirectUrlAfterVerification)
+            if (response) {
+                console.log('Verification email sent successfully!')
+                await authService.logout();
+                alert('Verification email sent successfully!')
+            }
+        } catch (error) {
+            setError(error.message)
+            console.log('resendVerificationEmail :: error: ', error);
         }
     }
 
@@ -90,6 +122,15 @@ function Login() {
                             </Button>
                         </div>
                     </form>
+                    <div className='text-center mt-4'>
+                        Email not verified ? <br />
+                        <button
+                            onClick={() => resendVerificationEmail()}
+                            className='text-primary hover:underline hover:scale-105 transition-all duration-300'
+                        >
+                            Click Here to Send Verification Link
+                        </button>
+                    </div>
                 </div>
             </BackgroundGradient>
         </div>
