@@ -11,7 +11,7 @@ const redirectUrlAfterVerification = import.meta.env.VITE_EMAILVERIFICATION_URL
 function Signup() {
   const navigate = useNavigate()
   const [error, setError] = useState("")
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const { register, handleSubmit } = useForm()
 
   const create = async(data) => {
