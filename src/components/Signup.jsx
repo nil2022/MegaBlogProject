@@ -69,7 +69,7 @@ function Signup() {
                 {...register("name", {
                   required: true,
                 })}
-                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
+                className="w-full bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
               />
               <Input
                 label="Email: "
@@ -82,7 +82,7 @@ function Signup() {
                       "Must be a valid email address"
                   }
                 })}
-                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
+                className="w-full bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
               />
               <Input
                 label="Password: "
@@ -91,7 +91,7 @@ function Signup() {
                 {...register("password", {
                   required: true,
                 })}
-                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
+                className="w-fullh bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
               />
               <Button
                 type="submit"
