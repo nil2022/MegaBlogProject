@@ -112,7 +112,7 @@ function Login() {
                                             "Must be a valid email address"
                                     }
                                 })}
-                                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
+                                className="w-full bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
                             />
                             <Input
                                 label="Password: "
@@ -125,7 +125,7 @@ function Login() {
                                     //     "Password must be between 8 and 16 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character"
                                     // }
                                 })}
-                                className="w-full text-white bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
+                                className="w-full bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
                             />
                             <Button
                                 type="submit"
