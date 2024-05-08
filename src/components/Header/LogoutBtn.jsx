@@ -9,7 +9,9 @@ function LogoutBtn() {
     const navigate = useNavigate()
     const logoutHandler = () => {
         authService.logout().then(() => {
-            console.log('Logout Successfully')
+            console.log('Logout Successfull')
+            alert('Logout Successfull')
+            localStorage.removeItem('userStatus')
             dispatch(logout())
             navigate('/login')
         })

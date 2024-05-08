@@ -12,7 +12,7 @@ const redirectUrlAfterVerification = import.meta.env.VITE_EMAILVERIFICATION_URL
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, getValues } = useForm()
     const [error, setError] = useState("")
     const [loginData, setLoginData] = useState()
     const [userIsVerified, setUserIsVerified] = useState(true)  
@@ -20,7 +20,7 @@ function Login() {
     // const authSlice = useSelector((state) => state.auth)
     // console.log('authSlice: (in Login component(in components/Login.jsx)) ', authSlice)
 
-    // console.log('loginData: ', handleSubmit)
+    // console.log('getValues: ', getValues())
 
     /** FUNCTION TO LOGIN USER */
     const login = async (data) => {
@@ -34,7 +34,8 @@ function Login() {
                 localStorage.setItem('userVerified', JSON.stringify(userData.emailVerification))
                 if (userData.emailVerification) {
                     setUserIsVerified(true)
-                    console.log('userData: (in Login component(in components/Login.jsx)) ', userData)
+                    // console.log('userData: (in Login component(in components/Login.jsx)) ', userData)
+                    localStorage.setItem('userStatus', JSON.stringify(true))
                     dispatch(authLogin({ userData }))
                     navigate("/")
                 } else {

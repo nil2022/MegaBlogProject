@@ -3,10 +3,9 @@ import {Container, PostForm} from '../components'
 
 function AddPost() {
   useEffect(() => {
-    console.log('Loaded AddPost.jsx')
-
+    // console.log('Loaded AddPost.jsx')
     return () => {
-      console.clear()
+      // console.clear()
     }
   })
   return (

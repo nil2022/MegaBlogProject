@@ -25,7 +25,7 @@ function Home() {
 
         return () => {
             // console.clear()
-            console.log('unmounted from Home.jsx')
+            // console.log('unmounted from Home.jsx')
         }
     }, [])
 

@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true)
-    if (userAuth.status === true) {
+    if (userAuth.status === true || (localStorage.getItem('userStatus') === 'true')) {
       authService.getCurrentUser()
         .then((userData) => {
           if (userData) {
