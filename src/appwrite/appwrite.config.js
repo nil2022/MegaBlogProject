@@ -1,16 +1,12 @@
 // Appwrite configuration
-import { useSelector } from "react-redux";
 import urlConfig from "../config/url.config";
-import { Client, ID, Databases, Storage, Query } from "appwrite";
-
-// const authSlice = useSelector((state) => state.auth.userData);
-// console.log('authSlice: (in appwrite.config.js): ', authSlice)
+import { Client, ID, Databases, Storage, Query, Account } from "appwrite";
 
 export class Service {
     client = new Client();
     databases;
     bucket;
-
+    
     constructor() {
         this.client
             .setEndpoint(urlConfig.appwriteUrl)
@@ -165,10 +161,14 @@ export class Service {
         }
     }
 
-    getFilePreview(fileId) {
+    getFilePreview(fileId, width, height, gravity, quality) {
         return this.bucket.getFilePreview(
             urlConfig.appwriteBucketId,
-            fileId
+            fileId,
+            width ? width : 0,
+            height ? height : 0,
+            gravity ? gravity : undefined,
+            quality ? quality : 100,
         )
     }
 }

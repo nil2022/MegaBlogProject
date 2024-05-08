@@ -12,8 +12,6 @@ export class AuthService {
       .setProject(urlConfig.appwriteProjectId);
     this.account = new Account(this.client);
   }
-
-  // ! Check code below for appwrite 'createVerification' method NOT WORKING !!
   async createAccount({ email, password, name }) {
     try {
       const userAccount = await this.account.create(
@@ -98,6 +96,28 @@ export class AuthService {
     }
 
     // return null;
+  }
+
+  /** Set User Preferences data to Appwrite server */
+  async setUserPreferences(userData) {
+    try {
+      const setUserPreferences = await this.account.updatePrefs({userData});
+      return setUserPreferences;
+    } catch (error) {
+      console.log("Appwrite service :: setUserPreferences :: error: ", error);
+      throw error;
+    }
+  }
+
+  /** Get User Preferences data from Appwrite server */
+  async getUserPreferences() {
+    try {
+      const fetchUserPreferences = await this.account.getPrefs();
+      return fetchUserPreferences;
+    } catch (error) {
+      console.log("Appwrite service :: getUserPreferences :: error: ", error);
+      throw error;
+    }
   }
 
   async logout() {
