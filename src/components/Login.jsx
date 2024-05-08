@@ -34,6 +34,9 @@ function Login() {
                 localStorage.setItem('userVerified', JSON.stringify(userData.emailVerification))
                 if (userData.emailVerification) {
                     setUserIsVerified(true)
+                    await authService.setUserPreferences(userData)
+                    // const userPreferences = await authService.getUserPreferences()
+                    // console.log('User preferences: (in Login component(in components/Login.jsx)) ', userPreferences)
                     // console.log('userData: (in Login component(in components/Login.jsx)) ', userData)
                     localStorage.setItem('userStatus', JSON.stringify(true))
                     dispatch(authLogin({ userData }))

@@ -46,7 +46,7 @@ function App() {
     <div className='w-full block'>
       <Header />
       <main>
-      <h2 className='text-2xl font-bold text-center'>{userAuth.status === true ? ('Welcome, '+ userAuth.userData.name) : ''}</h2>
+      <h2 className='text-2xl font-bold text-center w-[200px] sm:w-full mx-auto'>{userAuth.status === true ? ('Welcome, '+ userAuth.userData.name) : ''}</h2>
         <Outlet />
       </main>
       <Footer />

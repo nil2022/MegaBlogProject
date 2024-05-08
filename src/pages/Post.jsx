@@ -4,6 +4,7 @@ import appwriteService from "../appwrite/appwrite.config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import authService from "../appwrite/auth";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -17,7 +18,14 @@ export default function Post() {
     // console.log('Post: (in Post component): ', post);
     // console.log('User data: (in Post component): ', userData);
 
+    const getPostOwner = async () => {
+        const postOwner = await authService.getUserPreferences();
+        console.log('Post owner: (in Post component): ', postOwner?.userData?.name);
+        return postOwner;
+    };
+
     useEffect(() => {
+        getPostOwner();
         // console.log('Loaded Post.jsx')
         // console.log('Slug value: ', slug);
         if (slug) {
@@ -47,7 +55,13 @@ export default function Post() {
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        src={appwriteService.getFilePreview(
+                            post.featuredImage,
+                            500, // width
+                            '',  // height
+                            '',  // crop
+                            90   // quality
+                            )}
                         alt={post.title}
                         className="rounded-xl"
                     />
@@ -69,6 +83,9 @@ export default function Post() {
                 </div>
                 <div className="browser-css">
                     {parse(post.content)}
+                </div>
+                <div>
+                    {post.$id && <p className="text-sm text-gray-700">Posted by: {post.userId}</p>}
                 </div>
             </Container>
         </div>

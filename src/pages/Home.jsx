@@ -88,9 +88,9 @@ function Home() {
     return (
         <div className='w-full py-8'>
             <Container>
-                <div className='flex flex-wrap'>
+                <div className='flex flex-col sm:flex-row sm:gap-y-4 flex-wrap min-h-[500px] justify-center'>
                     {posts.map((post) => (
-                        <div key={post.$id} className='p-2 w-1/4'>
+                        <div key={post.$id} className='p-2 sm:max-w-[350px] sm:max-h-[400px]'>
                             <PostCard {...post} />
                         </div>
                     ))}
