@@ -13,6 +13,7 @@ function VerifyEmail() {
             if (status) {
                 console.log('Email Successfully Verified')
                 setVerificationStatus(true)
+                alert('Please login to continue')
                 setTimeout(() => {
                     navigate('/')
                 }, 1000);
@@ -35,7 +36,7 @@ function VerifyEmail() {
         </div>
     ) : (
         <div className="flex items-center justify-center">
-            <div className="mx-auto w-full max-w-lg p-10 text-4xl font-bold">
+            <div className="mx-auto text-center w-full max-w-lg p-10 text-4xl font-bold">
                 Invalid Verification link <br/>
                 <p className="text-red-600 mt-8 text-center text-lg">{error}</p>
             </div>

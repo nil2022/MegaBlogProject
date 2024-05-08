@@ -13,8 +13,8 @@ function Footer() {
                 <Logo width="100px" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">
-                  &copy; Copyright 2023. All Rights Reserved by DevUI.
+                <p className="text-sm text-gray-600 text-center sm:text-left">
+                  &copy; Copyright 2023. All Rights Reserved.
                 </p>
               </div>
             </div>
@@ -39,22 +39,6 @@ function Footer() {
                     to="/"
                   >
                     Pricing
-                  </Link>
-                </li>
-                <li className="mb-4">
-                  <Link
-                    className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                    to="/"
-                  >
-                    Affiliate Program
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                    to="/"
-                  >
-                    Press Kit
                   </Link>
                 </li>
               </ul>

@@ -86,7 +86,7 @@ function Login() {
             className='flex items-center justify-center w-full '>
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-zinc-800"
             >
-                <div className='mx-auto w-full max-w-lg rounded-xl sm:p-10  text-white'>
+                <div className='mx-auto w-full max-w-lg rounded-xl sm:p-10 text-white'>
                     <div className="mb-2 flex justify-center">
                         <span className="inline-block w-full max-w-[100px]">
                             <Logo width="100%" />
