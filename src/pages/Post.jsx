@@ -18,7 +18,7 @@ export default function Post() {
     // console.log('User data: (in Post component): ', userData);
 
     useEffect(() => {
-        console.log('Loaded Post.jsx')
+        // console.log('Loaded Post.jsx')
         // console.log('Slug value: ', slug);
         if (slug) {
             appwriteService.getPost(slug).then((post) => {

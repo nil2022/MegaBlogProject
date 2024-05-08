@@ -10,7 +10,7 @@ function AllPosts() {
     // console.log('authSlice: (in AllPosts component): ', authSlice.$id || null)
 
     useEffect(() => {
-        console.log('Loaded AllPosts.jsx')
+        // console.log('Loaded AllPosts.jsx')
         appwriteService.getPosts([]).then((posts) => {
             if (posts) {
                 setPosts(posts.documents)
@@ -23,7 +23,7 @@ function AllPosts() {
 
         return () => {
             // console.clear()
-            console.log('unmounted from AllPosts.jsx')
+            // console.log('unmounted from AllPosts.jsx')
         }
     }, [])
 
