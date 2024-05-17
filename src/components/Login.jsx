@@ -10,12 +10,16 @@ import { BackgroundGradient } from './ui/background-gradient'
 const redirectUrlAfterVerification = import.meta.env.VITE_EMAILVERIFICATION_URL
 
 function Login() {
+
+    const [passwordVisible, setPasswordVisible] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { register, handleSubmit, getValues } = useForm()
     const [error, setError] = useState("")
     const [loginData, setLoginData] = useState()
-    const [userIsVerified, setUserIsVerified] = useState(true)  
+    const [userIsVerified, setUserIsVerified] = useState(true)
+
+    const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible)
 
     // const authSlice = useSelector((state) => state.auth)
     // console.log('authSlice: (in Login component(in components/Login.jsx)) ', authSlice)
@@ -57,7 +61,7 @@ function Login() {
     const resendVerificationEmail = async () => {
         setError("")
         try {
-            if(loginData === undefined) {
+            if (loginData === undefined) {
                 alert('Please provide your Email and password')
                 throw new Error('Email and password are required to send verification link')
             }
@@ -87,9 +91,9 @@ function Login() {
             <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-zinc-800"
             >
                 <div className='mx-auto w-full max-w-lg rounded-xl sm:p-10 text-white'>
-                    <div className="mb-2 flex justify-center">
-                        <span className="inline-block w-full max-w-[100px]">
-                            <Logo width="100%" />
+                    <div className="mb-2">
+                        <span className="inline-block w-full">
+                            <img src="/padlock.svg" alt="login" width={60} className='mx-auto'/>
                         </span>
                     </div>
                     <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
@@ -118,19 +122,36 @@ function Login() {
                                 })}
                                 className="w-full bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
                             />
-                            <Input
-                                label="Password: "
-                                placeholder="Your Password"
-                                type="password"
-                                {...register("password", {
-                                    required: true,
-                                    // validate: {
-                                    //     matchPattern: (value) => /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/.test(value) ||
-                                    //     "Password must be between 8 and 16 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character"
-                                    // }
-                                })}
-                                className="w-full bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
-                            />
+                            <div className='relative flex flex-col'>
+                                <Input
+                                    label="Password: "
+                                    placeholder="Your Password"
+                                    type={passwordVisible ? 'text' : 'password'}
+                                    {...register("password", {
+                                        required: true,
+                                        // validate: {
+                                        //     matchPattern: (value) => /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/.test(value) ||
+                                        //     "Password must be between 8 and 16 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character"
+                                        // }
+                                    })}
+                                    className="w-full bg-gray-700 hover:ring-2 hover:ring-violet-300 placeholder:text-slate-400"
+                                />
+                                <div className="relative w-full py-2">
+                                    <button type='button'
+                                        onClick={togglePasswordVisibility}
+                                        className='flex justify-center'>
+                                        <input
+                                            type="checkbox"
+                                            checked={passwordVisible}
+                                            onChange={togglePasswordVisibility}
+                                            className="my-auto w-[16px] h-[16px]"
+                                        />
+                                        <span className="ml-2 font-[500] text-base">
+                                            Show Password
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
                             <Button
                                 type="submit"
                                 className="w-full">
