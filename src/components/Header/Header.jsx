@@ -51,7 +51,7 @@ function Header() {
         <nav className='flex flex-col sm:flex-row'>
           <div className='px-6 py-2 text-center hidden sm:block'>
             <Link to="/">
-              <Logo width='70px' />
+              <Logo width='60px' />
             </Link>
           </div>
           <ul className='flex flex-col sm:flex-row mx-auto sm:ml-auto items-center'>
