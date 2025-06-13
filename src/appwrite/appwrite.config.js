@@ -171,6 +171,14 @@ export class Service {
             quality ? quality : 100,
         )
     }
+
+    getFileView(fileId, token = "") {
+        return this.bucket.getFileView(
+            urlConfig.appwriteBucketId,
+            fileId,
+            token,
+        )
+    }
 }
 
 const service = new Service();

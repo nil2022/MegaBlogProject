@@ -8,14 +8,18 @@ function PostCard({ $id, title, featuredImage, userId }) {
         <Link to={`/post/${$id}`}>
             <div className='w-full bg-gray-100 rounded-xl p-8'>
                 <div className='w-full justify-center mb-2'>
-                    <img src={appwriteService.getFilePreview(
+                    {/* <img src={appwriteService.getFilePreview(
                         featuredImage,
                         400, // width
                         '',  // height
                         '',  // crop
                         90   // quality
                         )} alt={title}
-                        className='rounded-xl' />
+                        className='rounded-xl' /> */}
+                    <img src={appwriteService.getFileView(
+                        featuredImage,
+                    )} alt={title}
+                    className='rounded-xl w-full h-[200px] object-cover' />
                 </div>
                 <h2
                     className='text-xl text-center font-bold'>
